@@ -261,7 +261,7 @@ function file_code(path){
 
 // file display video |mp4|webm|avi|
 function file_video(path){
-	var url = window.location.origin + path;
+	var url = decodeURI(window.location.origin + path);
 	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}">Play in potplayer</a>`;
 	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
 	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in mxplayer</a>`;
