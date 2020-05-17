@@ -232,7 +232,6 @@ function file_code(path){
 	<label class="mdui-textfield-label">Download link</label>
 	<input class="mdui-textfield-input" type="text" value="${href}"/>
 </div>
-<a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 
 <script src="https://cdn.staticfile.org/ace/1.4.7/ace.js"></script>
 <script src="https://cdn.staticfile.org/ace/1.4.7/ext-language_tools.js"></script>
@@ -263,21 +262,21 @@ function file_code(path){
 // file display video |mp4|webm|avi|
 function file_video(path){
 	var url = window.location.origin + path;
-	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}"><i class="mdui-icon material-icons">&#xe038;</i>Play in potplayer</a>`;
+	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}">Play in potplayer</a>`;
 	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
-	    playBtn = `	<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end"><i class="mdui-icon material-icons">&#xe039;</i>Play in mxplayer</a>`;
+	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in mxplayer</a>`;
 	}
-    playBtn += `<button style="margin-left: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" data-clipboard-text="${url}">Copy Download Link to Clipboard</button>`;
+    playBtn += `<br><a style="margin-top: 15px" href="${url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">Direct Download</a>`;
+    playBtn += `<br><button style="margin-top: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" data-clipboard-text="${url}">Copy Download Link to Clipboard</button>`;
 	var content = `
 <div class="mdui-container-fluid">
 	<br>${playBtn}
 	<!-Fixed label->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">download link</label>
-	  <input class="mdui-textfield-input" type="text" value="${url}"/>
+	  <input class="mdui-textfield-input" type="text" value="${url}" readonly/>
 	</div>
 </div>
-<a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
 	$('#content').html(content);
 }
@@ -298,7 +297,6 @@ function file_audio(path){
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 </div>
-<a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
 	$('#content').html(content);
 }
@@ -317,9 +315,7 @@ function file_image(path){
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
     <br>
-</div>
-<a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
-	`;
+</div>`;
 	$('#content').html(content);
 }
 
@@ -415,4 +411,8 @@ $(function(){
     });
     
     render(path);
+    
+    $("input[type='text']").on("click", function () {
+        $(this).select();
+    });
 });
