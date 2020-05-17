@@ -262,12 +262,12 @@ function file_code(path){
 // file display video |mp4|webm|avi|
 function file_video(path){
 	var url = window.location.origin + path;
-	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}"><i class="mdui-icon material-icons">&#xe038;</i>Play in potplayer</a>`;
+	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}">Play in potplayer</a>`;
 	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
-	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end"><i class="mdui-icon material-icons">&#xe039;</i>Play in mxplayer</a>`;
+	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in mxplayer</a>`;
 	}
-    playBtn += `<br><a href="${href}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">Direct Download</a>`;
-    playBtn += `<br><button class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" data-clipboard-text="${href}">Copy Download Link to Clipboard</button>`;
+    playBtn += `<br><a style="margin-top: 15px" href="${href}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">Direct Download</a>`;
+    playBtn += `<br><button style="margin-top: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" data-clipboard-text="${href}">Copy Download Link to Clipboard</button>`;
 	var content = `
 <div class="mdui-container-fluid">
 	<br>${playBtn}
