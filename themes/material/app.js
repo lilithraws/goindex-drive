@@ -266,15 +266,15 @@ function file_video(path){
 	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
 	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in mxplayer</a>`;
 	}
-    playBtn += `<br><a style="margin-top: 15px" href="${href}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">Direct Download</a>`;
-    playBtn += `<br><button style="margin-top: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" data-clipboard-text="${href}">Copy Download Link to Clipboard</button>`;
+    playBtn += `<br><a style="margin-top: 15px" href="${url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">Direct Download</a>`;
+    playBtn += `<br><button style="margin-top: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" data-clipboard-text="${url}">Copy Download Link to Clipboard</button>`;
 	var content = `
 <div class="mdui-container-fluid">
 	<br>${playBtn}
 	<!-Fixed label->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">download link</label>
-	  <input class="mdui-textfield-input" type="text" value="${href}"/>
+	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 </div>
 	`;
