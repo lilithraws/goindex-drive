@@ -274,7 +274,7 @@ function file_video(path){
 	<!-Fixed label->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">download link</label>
-	  <input class="mdui-textfield-input" type="text" value="${url}"/>
+	  <input class="mdui-textfield-input" type="text" value="${url}" readonly/>
 	</div>
 </div>
 	`;
@@ -411,4 +411,8 @@ $(function(){
     });
     
     render(path);
+    
+    $("input[type='text']").on("click", function () {
+        $(this).select();
+    });
 });
