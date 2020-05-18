@@ -40,6 +40,9 @@ function render(path){
     }else{
 	    file(path);
     }
+    $("input[type='text']").on("click", function () {
+        $(this).select();
+    });
 }
 
 // Title
@@ -58,7 +61,12 @@ function nav(path) {
 		for (i in arr) {
 			var n = arr[i];
 			n = decodeURI(n);
-			p += n + '/';
+            var ext = n.split('.').pop();
+            if("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|flac|m4a|mp3|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
+	            p += n + "?a=view";
+            }else {
+                p += n + '/';
+            }
 			if (n == '') {
 				break;
 			}
@@ -122,7 +130,7 @@ function list_files(path,files){
             item['size'] = "";
         }
 
-        item['modifiedTime'] = utc2jakarta(item['modifiedTime']);
+        item['modifiedTime'] = utc2Taiwan(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if(item['mimeType'] == 'application/vnd.google-apps.folder'){
             html +=`<li class="mdui-list-item mdui-ripple"><a href="${p}" class="folder">
@@ -148,7 +156,7 @@ function list_files(path,files){
                 });
             }
             var ext = p.split('.').pop();
-            if("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
+            if("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|flac|m4a|mp3|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
 	            p += "?a=view";
 	            c += " view";
             }
@@ -198,7 +206,7 @@ function file(path){
 		return file_video(path);
 	}
 	
-	if("|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
+	if("|mp3|wav|ogg|m4a|flac|".indexOf(`|${ext}|`) >= 0){
 		return file_audio(path);
 	}
 
@@ -230,7 +238,7 @@ function file_code(path){
 </div>
 <div class="mdui-textfield">
 	<label class="mdui-textfield-label">Download link</label>
-	<input class="mdui-textfield-input" type="text" value="${href}"/>
+	<input class="mdui-textfield-input" type="text" value="${href}" readonly/>
 </div>
 
 <script src="https://cdn.staticfile.org/ace/1.4.7/ace.js"></script>
@@ -283,18 +291,20 @@ function file_video(path){
 
 // file display music |mp3|m4a|wav|ogg|
 function file_audio(path){
-	var url = window.location.origin + path;
+	var url = decodeURI(window.location.origin + path);
+    var playBtn = `<br><a style="margin-top: 15px" href="${url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent">Direct Download</a>`;
+    playBtn += `<br><button style="margin-top: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" data-clipboard-text="${url}">Copy Download Link to Clipboard</button>`;
 	var content = `
 <div class="mdui-container-fluid">
 	<br>
 	<audio class="mdui-center" preload controls>
 	  <source src="${url}"">
 	</audio>
-	<br>
+	<br>${playBtn}
 	<!-Fixed label->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Download link</label>
-	  <input class="mdui-textfield-input" type="text" value="${url}"/>
+	  <input class="mdui-textfield-input" type="text" value="${url}" readonly/>
 	</div>
 </div>
 	`;
@@ -304,7 +314,7 @@ function file_audio(path){
 
 // picture display
 function file_image(path){
-	var url = window.location.origin + path;
+	var url = decodeURI(window.location.origin + path);
 	var content = `
 <div class="mdui-container-fluid">
 	<br>
@@ -312,7 +322,7 @@ function file_image(path){
 	<br>
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Download link</label>
-	  <input class="mdui-textfield-input" type="text" value="${url}"/>
+	  <input class="mdui-textfield-input" type="text" value="${url}" readonly/>
 	</div>
     <br>
 </div>`;
@@ -325,7 +335,7 @@ function searchOnlyActiveDir() {
 }
 
 // time conversion
-function utc2jakarta(utc_datetime) {
+function utc2Taiwan(utc_datetime) {
     // change to normal time format year-month-day hour: minutes: seconds
     var T_pos = utc_datetime.indexOf('T');
     var Z_pos = utc_datetime.indexOf('Z');
@@ -339,7 +349,7 @@ function utc2jakarta(utc_datetime) {
     timestamp = timestamp / 1000;
 
     // Add 7 hours, Jakarta time is eight more time zones than UTC time
-    var unixtimestamp = timestamp + 7 * 60 * 60;
+    var unixtimestamp = timestamp + 8 * 60 * 60;
 
     // timestamp into time
     var unixtimestamp = new Date(unixtimestamp * 1000);
@@ -411,8 +421,4 @@ $(function(){
     });
     
     render(path);
-    
-    $("input[type='text']").on("click", function () {
-        $(this).select();
-    });
 });
