@@ -7,6 +7,7 @@ document.write('<script src="//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.m
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
 if(dark){document.write('<style>* {box-sizing: border-box}body{color:rgba(255,255,255,.87);background-color:#333232}.mdui-theme-primary-'+main_color+' .mdui-color-theme{background-color:#232427!important} .mdui-textfield-input{color:rgb(255, 255, 255)!important} .mdui-textfield-label{color:rgba(255, 255, 255, 0.7)!important}</style>');}
 // Initialize the page and load the necessary resources
+var obj_list = {};
 function init(){
     document.siteName = $('title').html();
     $('body').addClass("mdui-theme-primary-"+main_color+" mdui-theme-accent-"+accent_color);
@@ -40,6 +41,7 @@ function render(path){
     }else{
 	    file(path);
     }
+    $(window).scrollTop(0);
     $("input[type='text']").on("click", function () {
         $(this).select();
     });
@@ -119,12 +121,19 @@ function list(path){
     $('#list').html(`<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>`);
     $('#readme_md').hide().html('');
     $('#head_md').hide().html('');
-    $.post(path, function(data,status){
-        var obj = jQuery.parseJSON(data);
-        if(typeof obj != 'null'){
-            list_files(path,obj.files);
+    path = decodeURI(path);
+    if(obj_list[path] == null) {
+        $.post(path, function(data,status){
+            obj_list[path] = jQuery.parseJSON(data);
+            if(typeof obj_list[path] != 'null'){
+                list_files(path,obj_list[path].files);
+            }
+        });
+    }else {
+        if(typeof obj_list[path] != 'null'){
+            list_files(path,obj_list[path].files);
         }
-    });
+    }  
 }
 
 function list_files(path,files){
@@ -135,17 +144,16 @@ function list_files(path,files){
         if(item['size']==undefined){
             item['size'] = "";
         }
-
-        item['modifiedTime'] = utc2Taiwan(item['modifiedTime']);
-        item['size'] = formatFileSize(item['size']);
+        var modifiedTime = utc2Taiwan(item['modifiedTime']);
+        var size = formatFileSize(item['size']);
         if(item['mimeType'] == 'application/vnd.google-apps.folder'){
             html +=`<li class="mdui-list-item mdui-ripple"><a href="${p}" class="folder">
 	            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
 	            <i class="mdui-icon material-icons">folder_open</i>
 	              ${item.name}
 	            </div>
-	            <div class="mdui-col-sm-3 mdui-text-right">${item['modifiedTime']}</div>
-	            <div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
+	            <div class="mdui-col-sm-3 mdui-text-right">${modifiedTime}</div>
+	            <div class="mdui-col-sm-2 mdui-text-right">${size}</div>
 	            </a>
 	        </li>`;
         }else{
@@ -171,8 +179,8 @@ function list_files(path,files){
 	          <i class="mdui-icon material-icons">insert_drive_file</i>
 	            ${item.name}
 	          </div>
-	          <div class="mdui-col-sm-3 mdui-text-right">${item['modifiedTime']}</div>
-	          <div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
+	          <div class="mdui-col-sm-3 mdui-text-right">${modifiedTime}</div>
+	          <div class="mdui-col-sm-2 mdui-text-right">${size}</div>
 	          </a>
 	      </li>`;
         }
