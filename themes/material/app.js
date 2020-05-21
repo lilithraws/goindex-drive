@@ -441,7 +441,7 @@ $(function(){
         path = decodeURI(window.location.pathname);
         var url = $(this).attr('href');
         if(url == '/' && path == url) searchval = '';
-        if((url != '/' && path == url) || url.substr(-1) == '/') searchval = '';
+        if((url != '/' && path == url) || (url.substr(-1) == '/' && path.substr(-1) == '/')) searchval = '';
         history.pushState(null, null, url);
         render(url);
         return false;
