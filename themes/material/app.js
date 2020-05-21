@@ -9,6 +9,7 @@ if(dark){document.write('<style>* {box-sizing: border-box}body{color:rgba(255,25
 // Initialize the page and load the necessary resources
 var obj_list = {};
 var searchval = '';
+var currentpath = '';
 function init(){
     document.siteName = $('title').html();
     $('body').addClass("mdui-theme-primary-"+main_color+" mdui-theme-accent-"+accent_color);
@@ -50,6 +51,7 @@ function render(path){
     $("input[type='text']").on("click", function () {
         $(this).select();
     });
+    currentpath = path;
 }
 
 // Title
@@ -359,7 +361,7 @@ function file_image(path){
 function searchOnlyActiveDir() {
 	var e, t, n, l;
     searchval = document.getElementById("searchInput").value;
-	for (e = document.getElementById("searchInput").value.toUpperCase(), t = document.getElementById("list").getElementsByTagName("li"), l = 0; l < t.length; l++)((n = t[l].getElementsByTagName("a")[0]).textContent || n.innerText).toUpperCase().indexOf(e) > -1 ? t[l].style.display = "" : t[l].style.display = "none"
+	for (e = document.getElementById("searchInput").value.toUpperCase(), t = document.getElementById("list").getElementsByTagName("li"), l = 0; l < t.length; l++)((n = t[l].getElementsByTagName("a")[0]).getElementsByTagName("div")[0].textContent || n.innerText).toUpperCase().indexOf(e) > -1 ? t[l].style.display = "" : t[l].style.display = "none"
 }
 
 // time conversion
@@ -426,6 +428,7 @@ function markdown(el, data){
 
 // Listen for fallback events
 window.onpopstate = function(){
+    if(currentpath.substr(-1) == '/') searchval = '';
     var path = window.location.pathname;
     render(path);
 }
@@ -435,10 +438,10 @@ $(function(){
     var path = window.location.pathname;
     var cp = new ClipboardJS('.btn');
     $("body").on("click",'.folder',function(){
-        path = window.location.pathname;
-        if(path == '/') searchval = '';
+        path = decodeURI(window.location.pathname);
         var url = $(this).attr('href');
-        if(url != '/') searchval = '';
+        if(url == '/' && path == url) searchval = '';
+        if((url != '/' && path == url) || url.substr(-1) == '/') searchval = '';
         history.pushState(null, null, url);
         render(url);
         return false;
