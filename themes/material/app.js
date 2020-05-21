@@ -8,6 +8,7 @@ document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdu
 if(dark){document.write('<style>* {box-sizing: border-box}body{color:rgba(255,255,255,.87);background-color:#333232}.mdui-theme-primary-'+main_color+' .mdui-color-theme{background-color:#232427!important} .mdui-textfield-input{color:rgb(255, 255, 255)!important} .mdui-textfield-label{color:rgba(255, 255, 255, 0.7)!important}</style>');}
 // Initialize the page and load the necessary resources
 var obj_list = {};
+var searchval = '';
 function init(){
     document.siteName = $('title').html();
     $('body').addClass("mdui-theme-primary-"+main_color+" mdui-theme-accent-"+accent_color);
@@ -38,6 +39,10 @@ function render(path){
     nav(path);
     if(path.substr(-1) == '/'){
     	list(path);
+        if(searchval != '') {
+            $('#searchInput').val(searchval);
+            searchOnlyActiveDir();
+        }
     }else{
 	    file(path);
     }
@@ -353,6 +358,7 @@ function file_image(path){
 
 function searchOnlyActiveDir() {
 	var e, t, n, l;
+    searchval = document.getElementById("searchInput").value;
 	for (e = document.getElementById("searchInput").value.toUpperCase(), t = document.getElementById("list").getElementsByTagName("li"), l = 0; l < t.length; l++)((n = t[l].getElementsByTagName("a")[0]).textContent || n.innerText).toUpperCase().indexOf(e) > -1 ? t[l].style.display = "" : t[l].style.display = "none"
 }
 
@@ -429,6 +435,8 @@ $(function(){
     var path = window.location.pathname;
     var cp = new ClipboardJS('.btn');
     $("body").on("click",'.folder',function(){
+        path = window.location.pathname;
+        if(path == '/') searchval = '';
         var url = $(this).attr('href');
         history.pushState(null, null, url);
         render(url);
