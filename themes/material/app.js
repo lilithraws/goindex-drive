@@ -290,7 +290,7 @@ function file_video(path){
     }
 	if (/(Android)/i.test(navigator.userAgent)) {
 	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">Play in MXPlayer Pro</a>`;
-        playBtn += `<br><a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in MXPlayer Free</a>`;
+        playBtn += `<br><a style="margin-top: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in MXPlayer Free</a>`;
 	}
     if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         var applelink = url.replace(/(^\w+:|^)\/\//, '');
