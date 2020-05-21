@@ -438,6 +438,7 @@ $(function(){
         path = window.location.pathname;
         if(path == '/') searchval = '';
         var url = $(this).attr('href');
+        if(url != '/') searchval = '';
         history.pushState(null, null, url);
         render(url);
         return false;
