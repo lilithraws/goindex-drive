@@ -55,7 +55,7 @@ function render(path){
     //Matomo Code
     var currentUrl = location.href;
     _paq.push(['setCustomUrl', currentUrl]);
-    _paq.push(['setDocumentTitle', title]);
+    _paq.push(['setDocumentTitle', document.siteName+' - '+path]);
     _paq.push(['deleteCustomVariables', 'page']); 
     _paq.push(['setGenerationTimeMs', 0]);
     _paq.push(['trackPageView']);
