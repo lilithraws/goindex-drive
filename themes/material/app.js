@@ -52,6 +52,14 @@ function render(path){
         $(this).select();
     });
     currentpath = path;
+    //Matomo Code
+    var currentUrl = location.href;
+    _paq.push(['setCustomUrl', currentUrl]);
+    _paq.push(['setDocumentTitle', title]);
+    _paq.push(['deleteCustomVariables', 'page']); 
+    _paq.push(['setGenerationTimeMs', 0]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
 }
 
 // Title
