@@ -303,14 +303,15 @@ function file_code(path){
 
 // file display video |mp4|webm|avi|
 function file_video(path){
-	var url = decodeURI(window.location.origin + path);
+    var encoded_url = window.location.origin + path;
+	var url = decodeURI(encoded_url);
 	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}">Play in PotPlayer</a>`;
     if(/(Mac)/i.test(navigator.userAgent)) {
         playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="iina://open?url=${url}">Play in IINA</a>`;
     }
 	if (/(Android)/i.test(navigator.userAgent)) {
-	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">Play in MXPlayer Pro</a>`;
-        playBtn += `<br><a style="margin-top: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in MXPlayer Free</a>`;
+	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">Play in MXPlayer Pro</a>`;
+        playBtn += `<br><a style="margin-top: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in MXPlayer Free</a>`;
 	}
     if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         var applelink = url.replace(/(^\w+:|^)\/\//, '');
