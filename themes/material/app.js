@@ -319,9 +319,9 @@ function file_code(path){
 function file_video(path){
     var encoded_url = window.location.origin + path;
 	var url = decodeURI(encoded_url);
-	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}">Play in PotPlayer</a>`;
+	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${encoded_url}">Play in PotPlayer</a>`;
     if(/(Mac)/i.test(navigator.userAgent)) {
-        playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="iina://open?url=${url}">Play in IINA</a>`;
+        playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="iina://open?url=${encoded_url}">Play in IINA</a>`;
     }
 	if (/(Android)/i.test(navigator.userAgent)) {
 	    playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">Play in MXPlayer Pro</button>`;
