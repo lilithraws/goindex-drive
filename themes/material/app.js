@@ -51,13 +51,19 @@ function render(path){
     $("input[type='text']").on("click", function () {
         $(this).select();
     });
+    $(".android-btn").on("click", function () {
+        //Matomo Code
+        _paq.push(['trackEvent', 'Play in MXPlayer', decodeURI(path)]);
+        window.location = $(this).data("href");
+        return false;
+    })
     if(currentpath != path) {
         currentpath = path;
         //Matomo Code
         var currentUrl = location.href;
         _paq.push(['setCustomUrl', currentUrl]);
         _paq.push(['setDocumentTitle', document.siteName+' - '+path]);
-        _paq.push(['deleteCustomVariables', 'page']); 
+        _paq.push(['deleteCustomVariables', 'page']);
         _paq.push(['setGenerationTimeMs', 0]);
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
@@ -310,8 +316,8 @@ function file_video(path){
         playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="iina://open?url=${url}">Play in IINA</a>`;
     }
 	if (/(Android)/i.test(navigator.userAgent)) {
-	    playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">Play in MXPlayer Pro</a>`;
-        playBtn += `<br><a style="margin-top: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in MXPlayer Free</a>`;
+	    playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">Play in MXPlayer Pro</button>`;
+        playBtn += `<br><button style="margin-top: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">Play in MXPlayer Free</button>`;
 	}
     if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
         var applelink = url.replace(/(^\w+:|^)\/\//, '');
