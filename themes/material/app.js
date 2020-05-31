@@ -343,8 +343,8 @@ function file_video(path){
         var applelink = url.replace(/(^\w+:|^)\/\//, '');
         playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="infuse://${applelink}">Play in Infuse</a>`;
     }
-    playBtn += `<br><a style="margin-top: 15px" href="${url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">Direct Download</a>`;
-    playBtn += `<br><button style="margin-top: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent copy-btn" data-clipboard-text="${url}">Copy Download Link to Clipboard</button>`;
+    playBtn += `<br><a style="margin-top: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">Direct Download</a>`;
+    playBtn += `<br><button style="margin-top: 15px" class="btn mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent copy-btn" data-clipboard-text="${encoded_url}">Copy Download Link to Clipboard</button>`;
 	var content = `
 <div class="mdui-container-fluid">
 	<br>${playBtn}
