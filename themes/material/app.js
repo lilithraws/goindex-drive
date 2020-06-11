@@ -329,8 +329,8 @@ function file_code(path){
 
 // file display video |mp4|webm|avi|
 function file_video(path){
-    var encoded_url = encodeURI(window.location.origin + path);
-	var url = decodeURI(encoded_url);
+	var url = decodeURI(window.location.origin + path);
+    var encoded_url = encodeURI(url);
 	var playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent windows-btn" data-href="potplayer://${encoded_url}">Play in PotPlayer</button>`;
     if(/(Mac)/i.test(navigator.userAgent)) {
         playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mac-btn" data-href="iina://open?url=${encoded_url}">Play in IINA</button>`;
