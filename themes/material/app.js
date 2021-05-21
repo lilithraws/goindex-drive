@@ -193,6 +193,7 @@ function list_files(path,files){
         var modifiedTime = utc2Taiwan(item['modifiedTime']);
         var size = formatFileSize(item['size']);
         item.name = item.name.replace(/\//g, "／");
+        item.name = item.name.replace(/:/g, "：");
         if(item['mimeType'] == 'application/vnd.google-apps.folder'){
             html +=`<li class="mdui-list-item mdui-ripple"><a href="${p}" class="folder">
 	            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
