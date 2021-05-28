@@ -52,42 +52,18 @@ function render(path){
         $(this).select();
     });
     $(".windows-btn").on("click", function () {
-        //Matomo Code
-        _paq.push(['trackEvent', 'Play in PotPlayer', decodeURI(path)]);
         window.location = $(this).data("href");
         return false;
     });
     $(".mac-btn").on("click", function () {
-        //Matomo Code
-        _paq.push(['trackEvent', 'Play in IINA', decodeURI(path)]);
         window.location = $(this).data("href");
         return false;
     });
     $(".android-btn").on("click", function () {
-        //Matomo Code
-        _paq.push(['trackEvent', 'Play in MXPlayer', decodeURI(path)]);
         window.location = $(this).data("href");
         return false;
     });
-    $(".download-btn").on("click", function () {
-        //Matomo Code
-        _paq.push(['trackEvent', 'Download', decodeURI(path)]);
-    });
-    $(".copy-btn").on("click", function () {
-        //Matomo Code
-        _paq.push(['trackEvent', 'Copy', decodeURI(path)]);
-    });
-    if(currentpath != path) {
-        currentpath = path;
-        //Matomo Code
-        var currentUrl = location.href;
-        _paq.push(['setCustomUrl', currentUrl]);
-        _paq.push(['setDocumentTitle', document.siteName+' - '+path]);
-        _paq.push(['deleteCustomVariables', 'page']);
-        _paq.push(['setGenerationTimeMs', 0]);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-    }
+    currentpath = path;
 }
 
 // Title
