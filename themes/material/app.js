@@ -63,6 +63,11 @@ function render(path){
         window.location = $(this).data("href");
         return false;
     });
+    $(".mdui-textfield-close").on("click", function () {
+        $("#searchInput").val('').focus();
+        searchval = '';
+        return false;
+    });
     currentpath = path;
 }
 
@@ -112,8 +117,11 @@ function list(path){
 	content += `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>`;
     if(search){
-        if(dark){content += `<div class="mdui-textfield"><input class="mdui-textfield-input mdui-text-color-white-text" id="searchInput" onkeyup="searchOnlyActiveDir()" type="text" placeholder="Type to search.."></input></div>`;
-        }else{content += `<div class="mdui-textfield"><input class="mdui-textfield-input" id="searchInput" onkeyup="searchOnlyActiveDir()" type="text" placeholder="Type to search.."></input></div>`;}
+        if(dark){
+            content += `<div class="mdui-textfield mdui-textfield-floating-label"><label class="mdui-textfield-label">Search</label><input class="mdui-textfield-input mdui-text-color-white-text" id="searchInput" onkeyup="searchOnlyActiveDir()" type="text" placeholder="Type to search.."></input><button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button></div>`;
+        }else{
+            content += `<div class="mdui-textfield"><input class="mdui-textfield-input" id="searchInput" onkeyup="searchOnlyActiveDir()" type="text" placeholder="Type to search.."></input></div>`;
+        }
     }
 	content += `<div class="mdui-row"> 
 	  <ul class="mdui-list"> 
