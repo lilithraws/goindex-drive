@@ -69,6 +69,7 @@ function render(path){
         if(_input.val() != '') {
             _input.val('').focus();
             searchval = '';
+            searchOnlyActiveDir();
         }
         return false;
     });
