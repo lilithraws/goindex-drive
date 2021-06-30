@@ -209,6 +209,7 @@ function list_files(path,files){
                     markdown("#head_md",data);
                 });
             }
+            var download_url = encodeURI(window.location.origin + p);
             var ext = p.split('.').pop();
             if("|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|flac|m4a|mp3|wav|ogg|mpg|mpeg|mkv|m2ts|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
                 p += "?a=view";
@@ -223,8 +224,8 @@ function list_files(path,files){
               <div class="mdui-col-sm-2 mdui-text-right">${size}</div>
             </a>
             <div class="mdui-col-sm-1 mdui-text-right">
-              <a target="_blank" href="${p.replace("?a=view", "")}"><i class="mdui-icon material-icons">arrow_downward</i></a>
-              <i class="copy mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="${encodeURI(window.location.origin + p)}">content_copy</i>
+              <a target="_blank" href="${download_url}"><i class="mdui-icon material-icons">arrow_downward</i></a>
+              <i class="copy mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="${download_url}">content_copy</i>
             </div>
           </li>`;
         }
