@@ -224,7 +224,7 @@ function list_files(path,files){
               <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
               <div class="mdui-col-sm-1 mdui-text-center">
                 <a target="_blank" href=""><i class="mdui-icon material-icons">arrow_downward</i></a>
-                <i class="mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="${encodeURI(p)}">content_copy</i>
+                <i class="mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="">content_copy</i>
               </div>
             </a>
           </li>`;
