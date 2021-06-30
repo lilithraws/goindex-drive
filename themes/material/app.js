@@ -135,7 +135,7 @@ function list(path){
         File
     <i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
         </div> 
-        <div class="mdui-col-sm-2 mdui-text-center">
+        <div class="mdui-col-sm-3 mdui-text-center">
         Modified Time
     <i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
         </div> 
@@ -145,7 +145,6 @@ function list(path){
         </div> 
         <div class="mdui-col-sm-1 mdui-text-center">
          Acts
-    <i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
         </div> 
         </li> 
       </ul> 
@@ -193,7 +192,7 @@ function list_files(path,files){
                 <i class="mdui-icon material-icons">folder_open</i>
                   ${item.name}
                 </div>
-                <div class="mdui-col-sm-2 mdui-text-center">${modifiedTime}</div>
+                <div class="mdui-col-sm-3 mdui-text-center">${modifiedTime}</div>
                 <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
                 </a>
             </li>`;
@@ -215,17 +214,17 @@ function list_files(path,files){
                 p += "?a=view";
                 c += " view";
             }
-            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><div gd-type="${item.mimeType}" class="${c}">
-              <a class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" href="${p}">
+            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
+              <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
               <i class="mdui-icon material-icons">insert_drive_file</i>
                 ${item.name}
-              </a>
-              <div class="mdui-col-sm-2 mdui-text-center">${modifiedTime}</div>
-              <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
-              <div class="mdui-col-sm-1 mdui-text-center">
-                <i class="mdui-icon material-icons">arrow_downward</i>
-                <i class="mdui-icon material-icons" style="transform: scale(.8);">content_copy</i>
               </div>
+              <div class="mdui-col-sm-3 mdui-text-center">${modifiedTime}</div>
+              <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
+            </a>
+            <div class="mdui-col-sm-1 mdui-text-center">
+              <a target="_blank" href="${p.replace("?a=view", "")}"><i class="mdui-icon material-icons">arrow_downward</i></a>
+              <i class="mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="${encodeURI(window.location.origin + p)}">content_copy</i>
             </div>
           </li>`;
         }
