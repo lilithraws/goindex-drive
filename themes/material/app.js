@@ -135,16 +135,16 @@ function list(path){
         File
     <i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
         </div> 
-        <div class="mdui-col-sm-3 mdui-text-center">
+        <div class="mdui-col-sm-3 mdui-text-right">
         Modified Time
     <i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
         </div> 
-        <div class="mdui-col-sm-2 mdui-text-center">
+        <div class="mdui-col-sm-2 mdui-text-right">
          Size
     <i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
         </div> 
-        <div class="mdui-col-sm-1 mdui-text-center">
-         Acts
+        <div class="mdui-col-sm-1 mdui-text-right">
+         Actions
         </div> 
         </li> 
       </ul> 
@@ -219,17 +219,18 @@ function list_files(path,files){
               <i class="mdui-icon material-icons">insert_drive_file</i>
                 ${item.name}
               </div>
-              <div class="mdui-col-sm-3 mdui-text-center">${modifiedTime}</div>
-              <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
+              <div class="mdui-col-sm-3 mdui-text-right">${modifiedTime}</div>
+              <div class="mdui-col-sm-2 mdui-text-right">${size}</div>
             </a>
-            <div class="mdui-col-sm-1 mdui-text-center">
+            <div class="mdui-col-sm-1 mdui-text-right">
               <a target="_blank" href="${p.replace("?a=view", "")}"><i class="mdui-icon material-icons">arrow_downward</i></a>
-              <i class="mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="${encodeURI(window.location.origin + p)}">content_copy</i>
+              <i class="copy mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="${encodeURI(window.location.origin + p)}">content_copy</i>
             </div>
           </li>`;
         }
     }
     $('#list').html(html);
+    var copy = new ClipboardJS('.copy');
 }
 
 
