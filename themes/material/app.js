@@ -215,18 +215,18 @@ function list_files(path,files){
                 p += "?a=view";
                 c += " view";
             }
-            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
-              <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
+            html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><div gd-type="${item.mimeType}" class="${c}">
+              <a class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" href="${p}">
               <i class="mdui-icon material-icons">insert_drive_file</i>
                 ${item.name}
-              </div>
+              </a>
               <div class="mdui-col-sm-2 mdui-text-center">${modifiedTime}</div>
               <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
               <div class="mdui-col-sm-1 mdui-text-center">
-                <a target="_blank" href=""><i class="mdui-icon material-icons">arrow_downward</i></a>
-                <i class="mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="">content_copy</i>
+                <i class="mdui-icon material-icons">arrow_downward</i>
+                <i class="mdui-icon material-icons" style="transform: scale(.8);">content_copy</i>
               </div>
-            </a>
+            </div>
           </li>`;
         }
     }
