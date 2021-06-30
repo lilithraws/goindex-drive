@@ -131,7 +131,7 @@ function list(path){
     content += `<div class="mdui-row"> 
       <ul class="mdui-list"> 
        <li class="mdui-list-item th"> 
-        <div class="mdui-col-xs-12 mdui-col-sm-7">
+        <div class="mdui-col-xs-12 mdui-col-sm-6">
         File
     <i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
         </div> 
@@ -188,7 +188,7 @@ function list_files(path,files){
         item.name = item.name.replace(/:/g, "：");
         if(item['mimeType'] == 'application/vnd.google-apps.folder'){
             html +=`<li class="mdui-list-item mdui-ripple"><a href="${p}" class="folder">
-                <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
+                <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-text-truncate">
                 <i class="mdui-icon material-icons">folder_open</i>
                   ${item.name}
                 </div>
@@ -217,7 +217,7 @@ function list_files(path,files){
                 c += " view";
             }
             html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
-              <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
+              <div class="mdui-col-xs-12 mdui-col-sm-6 mdui-text-truncate">
               <i class="mdui-icon material-icons">insert_drive_file</i>
                 ${item.name}
               </div>
