@@ -188,7 +188,7 @@ function list_files(path,files){
         item.name = item.name.replace(/:/g, "：");
         if(item['mimeType'] == 'application/vnd.google-apps.folder'){
             html +=`<li class="mdui-list-item mdui-ripple"><a href="${p}" class="folder">
-                <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate">
+                <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" style="max-width: 522px;">
                 <i class="mdui-icon material-icons">folder_open</i>
                   ${item.name}
                 </div>
