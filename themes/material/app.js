@@ -135,12 +135,16 @@ function list(path){
 	    File
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
-	    <div class="mdui-col-sm-3 mdui-text-right">
+	    <div class="mdui-col-sm-2 mdui-text-center">
         Modified Time
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
-	    <div class="mdui-col-sm-2 mdui-text-right">
+	    <div class="mdui-col-sm-2 mdui-text-center">
 	     Size
+	<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
+	    </div> 
+        <div class="mdui-col-sm-1 mdui-text-center">
+	     Acts
 	<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
 	    </div> 
 	    </li> 
@@ -189,8 +193,8 @@ function list_files(path,files){
 	            <i class="mdui-icon material-icons">folder_open</i>
 	              ${item.name}
 	            </div>
-	            <div class="mdui-col-sm-3 mdui-text-right">${modifiedTime}</div>
-	            <div class="mdui-col-sm-2 mdui-text-right">${size}</div>
+	            <div class="mdui-col-sm-2 mdui-text-center">${modifiedTime}</div>
+	            <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
 	            </a>
 	        </li>`;
         }else{
@@ -216,8 +220,12 @@ function list_files(path,files){
 	          <i class="mdui-icon material-icons">insert_drive_file</i>
 	            ${item.name}
 	          </div>
-	          <div class="mdui-col-sm-3 mdui-text-right">${modifiedTime}</div>
-	          <div class="mdui-col-sm-2 mdui-text-right">${size}</div>
+	          <div class="mdui-col-sm-2 mdui-text-center">${modifiedTime}</div>
+	          <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
+              <div class="mdui-col-sm-1 mdui-text-center">
+                <a target="_blank" href="${p.replace("?a=view", "")}"><i class="mdui-icon material-icons">arrow_downward</i></a>
+                <i class="mdui-icon material-icons" style="transform: scale(.8);" data-clipboard-text="${encodeURI(p)}">content_copy</i>
+              </div>
 	          </a>
 	      </li>`;
         }
