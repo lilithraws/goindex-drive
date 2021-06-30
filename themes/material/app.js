@@ -192,9 +192,10 @@ function list_files(path,files){
                 <i class="mdui-icon material-icons">folder_open</i>
                   ${item.name}
                 </div>
-                <div class="mdui-col-sm-3 mdui-text-center">${modifiedTime}</div>
-                <div class="mdui-col-sm-2 mdui-text-center">${size}</div>
+                <div class="mdui-col-sm-3 mdui-text-right">${modifiedTime}</div>
+                <div class="mdui-col-sm-2 mdui-text-right">${size}</div>
                 </a>
+                <div class="mdui-col-sm-1 mdui-text-right"></div>
             </li>`;
         }else{
             var p = path+item.name;
